@@ -22,7 +22,7 @@ import com.aravindhan.rest.repository.UserRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
-@Path("/")
+@Path("/rest")
 public class UserResource {
 	
 	@Autowired
@@ -41,7 +41,7 @@ public class UserResource {
 	@POST
 	@Consumes("application/json")
 	@Produces("application/json")
-	@Path("user/addUser")
+	@Path("/postUser")
 	public Response addUser(User user) {
 		
 		user.setCreated_on(getDateTime());
@@ -72,7 +72,7 @@ public class UserResource {
 	}
 	
 	@GET
-	@Path("user/searchQuery")
+	@Path("/getUser")
 	@Produces("application/json")
 	public List<User> search(@QueryParam("query") String query, @QueryParam("limit") String limit){
 		finalQuery = query+" LIMIT "+limit; 
@@ -80,7 +80,7 @@ public class UserResource {
 	}
 	
 	@PUT
-	@Path("user/updateUser")
+	@Path("/updateUser")
 	@Produces("application/json")
 	public void update(@QueryParam("query") String query) {
 		customQuery.update(query);
