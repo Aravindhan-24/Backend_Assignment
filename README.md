@@ -7,7 +7,7 @@ Four main functionalities implemented in this assignment via REST API calls usin
   1. Add user:
      Enter details of the user and the request will be sent as JSON as POST request. 
      Validations have been applied on email and mobile.
-     If Firstname, Mobile, email are not sent in payload API will throw bad request.
+     If Firstname, Mobile, email are not sent in payload API will throw bad request. If the data is persisted the API return the created user entry as a response to the client as JSON.
   
   2. Search Query:
      Enter the search query and limit into the console and the response will be returned as JSON having a List to store user entries.
