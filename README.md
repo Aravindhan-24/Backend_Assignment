@@ -10,7 +10,7 @@ Four main functionalities implemented in this assignment via REST API calls usin
      If Firstname, Mobile, email are not sent in payload API will throw bad request. If the data is persisted the API return the created user entry as a response to the client as JSON.
   
   2. Search Query:
-     Enter the search query and limit into the console and the response will be returned as JSON having a List to store user entries.
+     Enter the search query and limit in the console and the response will be returned as JSON having a List to store user entries.
   
   3. Update:
      Enter the update query and in the back end the version will be updated based on number of time the tuple is updated and the time and date last modification done on that      tuple.
