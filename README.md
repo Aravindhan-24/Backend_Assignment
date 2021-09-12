@@ -1,7 +1,7 @@
 # Backend_Assignment
 Spring Framework, Java, REST API (preferably with JAX-RS), MySql, Hibernate.
 
-Run as spring boot application create a database jersery.
+Run as spring boot application, create a database jersery.
 
 Four main functionalities implemented in this assignment via REST API calls using JAX-RS from Java Application
   
