@@ -5,6 +5,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -99,18 +100,16 @@ public class UserResponse {
 		String searchQuery = Query;
 		int query_limit = limit;
 		String readLine = null;
-		String urlString = "http://localhost:8080/users/getUser?query="+searchQuery+"&limit="+query_limit;
-		if(urlString.contains(" "))
-		    urlString = urlString.replace(" ", "%20");
+		String urlString = "http://localhost:8080/users/getUser?query="+URLEncoder.encode(searchQuery,"UTF-8")+"&limit="+query_limit;
+
 		URL url = new URL(urlString);
 		HttpURLConnection connection = (HttpURLConnection)url.openConnection();
 		connection.setRequestMethod("GET");
 		connection.setRequestProperty("Content-Type", "application/json");
-		connection.setRequestProperty("Accept", "application/json");
 		connection.setDoOutput(true);
 		
 		int responseCode = connection.getResponseCode();
-
+		
 		StringBuffer response=null;
 	    if (responseCode == HttpURLConnection.HTTP_OK) {
 	        BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
@@ -118,7 +117,7 @@ public class UserResponse {
 	        while ((readLine = in .readLine()) != null) {
 	            response.append(readLine);
 	        } in .close();
-	    }
+	     }
 	     ObjectMapper obj_mapper = new ObjectMapper();
 	     List<User> userJsonList = obj_mapper.readValue(String.valueOf(response),new TypeReference<List<User>>(){});
 	     for(int i=0;i<userJsonList.size();i++,System.out.println(", ")) {
@@ -144,20 +143,16 @@ public class UserResponse {
 		}
 	}
 	public static void update(String Query) {
-		System.out.println("Update Invoked");
 		try {
 			String sql = Query;
-			System.out.println(sql);
-			String urlString = "http://localhost:8080/users/updateUser?query="+sql;
-			
-			if(urlString.contains(" "))
-			    urlString = urlString.replace(" ", "%20");
+		
+			String urlString = "http://localhost:8080/users/updateUser?query="+URLEncoder.encode(sql,"UTF-8");
+
 			URL url = new URL(urlString);
 			HttpURLConnection connection = (HttpURLConnection)url.openConnection();
 			connection.setRequestMethod("PUT");
-			connection.setRequestProperty("Content-Type", "application/json");
-			connection.setRequestProperty("Accept", "application/json");
-			connection.setDoOutput(true);
+			
+			connection.getResponseCode();
 			
 		}
 		catch(Exception e) {
