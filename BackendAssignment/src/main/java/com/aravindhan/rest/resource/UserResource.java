@@ -3,7 +3,6 @@ package com.aravindhan.rest.resource;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
-import java.util.regex.Pattern;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -22,7 +21,7 @@ import com.aravindhan.rest.repository.UserRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
-@Path("/rest")
+@Path("/users")
 public class UserResource {
 	
 	@Autowired
@@ -37,6 +36,7 @@ public class UserResource {
 	
 	private static final ObjectMapper mapper = new ObjectMapper();
 	ObjectNode json = mapper.createObjectNode();
+
 	
 	@POST
 	@Consumes("application/json")
@@ -45,20 +45,8 @@ public class UserResource {
 	public Response addUser(User user) {
 		
 		user.setCreated_on(getDateTime());
-		
-		if(String.valueOf(user.getMobile()).length()!=10) {
-			return Response.status(Response.Status.BAD_REQUEST).entity(json).build();
-		}
-		
-		if(String.valueOf(user.getPincode()).length()!=6) {
-			return Response.status(Response.Status.BAD_REQUEST).entity(json).build();
-		}
-		
-		else if(!Pattern.matches("^(.+)@(.+)$", user.getEmail())) {
-			return Response.status(Response.Status.BAD_REQUEST).entity(json).build();
-		}
-		
-		else if( (user.getFirstName()==" "||user.getFirstName().length()<1) || 
+
+		if( (user.getFirstName()==" "||user.getFirstName().length()<1) || 
 				 (user.getEmail()==" "||user.getFirstName().length()<1) || 
 				  user.getMobile().length()==0) {
 			return Response.status(Response.Status.BAD_REQUEST).entity(json).build();
@@ -66,6 +54,7 @@ public class UserResource {
 		
 		else {
 		repository.save(user);
+		
 		json.put("result","created user entry");
 		return Response.status(Response.Status.OK).entity(json).build();
 		}
