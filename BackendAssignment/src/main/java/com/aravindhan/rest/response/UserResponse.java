@@ -19,6 +19,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class UserResponse {
 	
+	static HttpURLConnection connection;
+	
 	public static void addUser() {
 		@SuppressWarnings("resource")
 		Scanner sc = new Scanner(System.in);
@@ -26,7 +28,7 @@ public class UserResponse {
 		try {
 		String urlString = "http://localhost:8080/users/postUser";
 		URL url = new URL(urlString);
-		HttpURLConnection connection = (HttpURLConnection)url.openConnection();
+		connection = (HttpURLConnection)url.openConnection();
 		
 		connection.setRequestMethod("POST");
 		connection.setRequestProperty("Content-Type", "application/json");
@@ -94,6 +96,9 @@ public class UserResponse {
 			System.out.println(e.getMessage());
 			System.out.println("First Name, email, mobile might be missing");
 		}
+		finally {
+			connection.disconnect();
+		}
 	}
 	public static void searchQuery(String Query, int limit) {
 		try {
@@ -103,7 +108,7 @@ public class UserResponse {
 		String urlString = "http://localhost:8080/users/getUser?query="+URLEncoder.encode(searchQuery,"UTF-8")+"&limit="+query_limit;
 
 		URL url = new URL(urlString);
-		HttpURLConnection connection = (HttpURLConnection)url.openConnection();
+		connection = (HttpURLConnection)url.openConnection();
 		connection.setRequestMethod("GET");
 		connection.setRequestProperty("Content-Type", "application/json");
 		connection.setDoOutput(true);
@@ -141,6 +146,9 @@ public class UserResponse {
 			System.out.println("Check for proper table name or syntax");
 	
 		}
+		finally {
+			connection.disconnect();
+		}
 	}
 	public static void update(String Query) {
 		try {
@@ -149,7 +157,7 @@ public class UserResponse {
 			String urlString = "http://localhost:8080/users/updateUser?query="+URLEncoder.encode(sql,"UTF-8");
 
 			URL url = new URL(urlString);
-			HttpURLConnection connection = (HttpURLConnection)url.openConnection();
+			connection = (HttpURLConnection)url.openConnection();
 			connection.setRequestMethod("PUT");
 			
 			connection.getResponseCode();
@@ -157,6 +165,9 @@ public class UserResponse {
 		}
 		catch(Exception e) {
 			System.out.println("Check for proper table name or syntax");
+		}
+		finally {
+			connection.disconnect();
 		}
 	}
 }
