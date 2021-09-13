@@ -1,4 +1,4 @@
-	package com.aravindhan.rest.resource;
+package com.aravindhan.rest.resource;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
