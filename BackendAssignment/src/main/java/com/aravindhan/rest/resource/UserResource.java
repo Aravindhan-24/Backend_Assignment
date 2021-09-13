@@ -78,7 +78,7 @@ public class UserResource {
 	
 	public static String getDateTime() {
 		LocalDateTime now = LocalDateTime.now(); 
-		DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/yyyy HH-mm-ss"); 
+		DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss"); 
 		return now.format(format);
 		
 	}
