@@ -1,4 +1,4 @@
-package com.aravindhan.rest.resource;
+	package com.aravindhan.rest.resource;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -49,7 +49,7 @@ public class UserResource {
 		if( (user.getFirstName()==" "||user.getFirstName().length()<1) || 
 				 (user.getEmail()==" "||user.getFirstName().length()<1) || 
 				  user.getMobile().length()==0) {
-			return Response.status(Response.Status.BAD_REQUEST).entity(json).build();
+			return Response.status(Response.Status.BAD_REQUEST).build();
 		}
 		
 		else {
